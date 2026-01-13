@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Official KITSW Universal SGPA & CGPA Calculator based on URR-24 Regulations. Calculate your SGPA strictly excluding F-grades and convert CGPA to Percentage instantly.">
+    <meta name="keywords" content="KITSW, SGPA Calculator, URR-24, CGPA to Percentage, Student Portal">
+    <meta property="og:title" content="KITSW Universal SGPA Calculator (URR-24)">
+    <meta property="og:description"
+        content="Calculate your SGPA accurately with URR-24 rules (F-grade exclusion). Official links included.">
+    <meta property="og:type" content="website">
+
+    <title>KITSW Universal SGPA Calculator (URR-24)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media print {
+
+            .no-print,
+            header p,
+            footer p:not(:last-child),
+            .tab-btn,
+            .mb-8.p-6 {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            #results-section {
+                border: 2px solid #000;
+                break-inside: avoid;
+            }
+
+            header {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen text-slate-800 p-4 lg:p-8">
+
+    <!-- Header -->
+    <header class="max-w-4xl mx-auto mb-8 text-center md:text-left md:flex md:items-center md:justify-between">
+        <div>
+            <h1 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">KITSW <span
+                    class="text-indigo-600">Universal</span></h1>
+            <p class="text-slate-500 font-medium">SGPA & CGPA Calculator • Based on URR-24 Regulations</p>
+        </div>
+        <!-- <div
+            class="mt-4 md:mt-0 text-xs font-bold bg-white border border-slate-200 px-3 py-1 rounded-full text-slate-500 shadow-sm inline-block">
+            Beta v1.0
+        </div> -->
+    </header>
+
+    <!-- Main Card -->
+    <div
+        class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
+
+        <!-- Tabs -->
+        <div class="flex border-b border-slate-200 overflow-x-auto scroller-hide">
+            <button onclick="switchTab('tab-calc')"
+                class="tab-btn flex-1 py-4 px-6 text-sm font-bold border-b-2 text-indigo-600 border-indigo-600 bg-indigo-50 transition-all whitespace-nowrap">SGPA
+                Calculator</button>
+            <button onclick="switchTab('tab-conv')"
+                class="tab-btn flex-1 py-4 px-6 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 transition-all whitespace-nowrap">CGPA
+                to Percentage
+            </button>
+            <!-- <button onclick="switchTab('tab-plan')"
+                class="tab-btn flex-1 py-4 px-6 text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-700 transition-all whitespace-nowrap">Target
+                Planner</button> -->
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-6 md:p-8">
+
+            <!-- Tool 1: SGPA Calculator -->
+            <div id="tab-calc" class="tab-content space-y-8 animate-fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Branch</label>
+                        <select id="branch-select"
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:ring-2 focus:ring-indigo-500 outline-none transition cursor-pointer">
+                            <option value="">Select Branch</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Semester</label>
+                        <select id="semester-select" disabled
+                            class="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl font-medium focus:ring-2 focus:ring-indigo-500 outline-none transition disabled:opacity-50 cursor-pointer">
+                            <option value="">Select Semester</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Course Table -->
+                <div id="course-container" class="hidden border border-slate-200 rounded-xl overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-50 border-b border-slate-200">
+                            <tr>
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Course Title
+                                </th>
+                                <th
+                                    class="p-4 text-xs font-bold text-slate-500 uppercase text-center w-24 hidden md:table-cell">
+                                    Credits</th>
+                                <th class="p-4 text-xs font-bold text-slate-500 uppercase w-32">Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="course-list" class="divide-y divide-slate-100 bg-white">
+                            <!-- JS Generated Rows -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Results -->
+                <div id="results-section" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div
+                        class="bg-gradient-to-br from-indigo-600 to-indigo-700 p-6 rounded-2xl text-white shadow-lg shadow-indigo-200">
+                        <p class="text-indigo-100 text-xs font-bold uppercase tracking-widest mb-1">Semester SGPA</p>
+                        <h2 id="sgpa-display" class="text-4xl md:text-5xl font-black">0.00</h2>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Equivalent %</p>
+                        <h2 id="percentage-display" class="text-3xl font-bold text-slate-700">0.0%</h2>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Cleared Credits</p>
+                        <h2 id="credits-display" class="text-3xl font-bold text-slate-700">0 / 0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 2: Converter -->
+            <div id="tab-conv" class="tab-content hidden max-w-lg mx-auto space-y-6 pt-4">
+                <div class="text-center">
+                    <h3 class="font-bold text-xl text-slate-800">CGPA to % Converter</h3>
+                    <p class="text-sm text-slate-500 mt-1">Formula: (CGPA - 0.50) × 10</p>
+                </div>
+                <div class="flex gap-4 items-end bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                    <div class="flex-1">
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1.5">Enter SGPA / CGPA</label>
+                        <input type="number" id="converter-input" step="0.01" max="10" placeholder="e.g. 8.75"
+                            class="w-full p-3 bg-white border border-slate-300 rounded-xl text-lg font-bold text-center focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <button onclick="convertSgpaToPerc()"
+                        class="h-[52px] px-6 bg-slate-800 text-white font-bold rounded-xl hover:bg-slate-900 transition">Convert</button>
+                </div>
+                <div id="converter-result"
+                    class="text-center p-6 bg-indigo-50 rounded-2xl border-2 border-indigo-100 min-h-[100px] flex flex-col justify-center items-center">
+                    <span class="text-slate-400 font-medium">Result will appear here</span>
+                </div>
+            </div>
+
+            <!-- Tool 3: Planner -->
+            <!-- <div id="tab-plan" class="tab-content hidden max-w-2xl mx-auto space-y-6">
+                <div class="text-center mb-6">
+                    <h3 class="font-bold text-xl text-slate-800">Target CGPA Planner</h3>
+                    <p class="text-sm text-slate-500 mt-1">Calculate what SGPA you need next semester</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Current CGPA</label>
+                        <input type="number" id="current-cgpa" placeholder="Current"
+                            class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Current Total
+                            Credits</label>
+                        <input type="number" id="current-credits" placeholder="e.g. 60"
+                            class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 font-medium">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-indigo-600 uppercase mb-1">Target CGPA</label>
+                        <input type="number" id="target-cgpa" placeholder="Goal"
+                            class="w-full p-3 border-2 border-indigo-100 rounded-xl bg-white font-bold text-indigo-700 focus:border-indigo-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Next Sem Credits</label>
+                        <input type="number" id="next-credits" placeholder="e.g. 24"
+                            class="w-full p-3 border border-slate-200 rounded-xl bg-slate-50 font-medium">
+                    </div>
+                </div>
+
+                <button onclick="calculateTarget()"
+                    class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition shadow-lg shadow-indigo-200">Calculate
+                    Required SGPA</button>
+
+                <div id="planner-result" class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                    <span class="text-slate-400 font-medium">Enter details to calculate</span>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+    <footer class="max-w-4xl mx-auto mt-12 mb-8 text-center text-slate-400 text-sm">
+
+        <!-- Official Links -->
+        <div class="mb-8 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Official Quick Links</p>
+            <div class="flex flex-wrap justify-center gap-3 md:gap-6">
+                <a href="https://kitsw.rlabs24.in/" target="_blank"
+                    class="px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold hover:bg-indigo-100 transition">Courseweb</a>
+                <a href="https://tscms-kitsw.aptonline.in/UMS" target="_blank"
+                    class="px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold hover:bg-indigo-100 transition">UMS
+                    Login</a>
+                <a href="https://www.kitswexams.com/" target="_blank"
+                    class="px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold hover:bg-indigo-100 transition">Exam
+                    Results</a>
+                <a href="https://www.kitsw.ac.in/academics/URR-24/URR24_Rules_and_Regulations.pdf" target="_blank"
+                    class="px-3 py-1.5 bg-yellow-50 text-yellow-700 rounded-lg text-xs font-bold hover:bg-yellow-100 transition">URR-24
+                    Rules (PDF)</a>
+            </div>
+        </div>
+
+        <p>&copy; Made with ❤️ by <a target="_blank" href="https://github.com/ziyadhyder911"
+                class="text-indigo-500 font-bold hover:underline">Ziyad Hyder</a></p>
+        <p class="text-xs mt-2">Not affiliated with KITS Administration</p>
+        <p class="text-xs mt-2 font-mono text-slate-300">v1.0.0</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/calculator.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
