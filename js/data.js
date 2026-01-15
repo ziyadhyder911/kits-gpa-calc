@@ -214,7 +214,92 @@ const COURSE_DATA = {
         "Sem 1": [{ n: "Diff Calc & ODE", c: 3 }, { n: "Engg Chemistry", c: 4 }, { n: "Switching Theory", c: 3 }, { n: "PPS with C", c: 4 }, { n: "English Comm", c: 2 }, { n: "Sports & Yoga", c: 1 }, { n: "Graphics & CAD", c: 1 }, { n: "Practicum-1", c: 1 }, { n: "SEA/SAA-1", c: 1 }, { n: "Expert Talk-1", c: 1 }]
     },
     "ECE": {
-        "Sem 1": [{ n: "Diff Calc & ODE", c: 3 }, { n: "Engg Physics", c: 4 }, { n: "Switching Theory", c: 3 }, { n: "PPS with C", c: 4 }, { n: "Basic Electrical", c: 4 }, { n: "Environmental", c: 0 }, { n: "IDEA Lab", c: 1 }, { n: "Practicum-1", c: 1 }, { n: "SEA/SAA-1", c: 1 }, { n: "Expert Talk-1", c: 1 }]
+        "Sem 1": [
+            { n: "DCODE", c: 3 },
+            { n: "EP", c: 4 },
+            { n: "STLD", c: 3 },
+            { n: "PPSC", c: 4 },
+            { n: "BEE", c: 4 },
+            { n: "ILMS", c: 1 },
+            { n: "Practicum-1", c: 1 },
+            { n: "SEA/SAA-1", c: 1 },
+            { n: "ETS-1", c: 1 }
+        ],
+        "Sem 2": [
+            { n: "MTVC", c: 3 },
+            { n: "EC", c: 4 },
+            { n: "Electronic Circuits", c: 3 },
+            { n: "DSTC", c: 4 },
+            { n: "ECRW", c: 2 },
+            { n: "Sports & Yoga", c: 1 },
+            { n: "EGCAD", c: 1 },
+            { n: "PSD Lab-1", c: 1 },
+            { n: "Practicum-2", c: 1 },
+            { n: "SEA/SAA-2", c: 1 },
+            { n: "ETS-2", c: 1 }
+        ],
+        "Sem 3": [
+            { n: "AM", c: 3 },
+            { n: "ECAD", c: 4 },
+            { n: "DD", c: 4 },
+            { n: "SS", c: 3 },
+            { n: "OOP Through Java", c: 4 },
+            { n: "QALR", c: 2 },
+            { n: "PSD Lab-2", c: 1 },
+            { n: "Practicum-3", c: 1 },
+            { n: "SEA/SAA-3", c: 1 },
+            { n: "ETS-3", c: 1 }
+        ],
+        "Sem 4": [
+            { n: "ICA", c: 4 },
+            { n: "CS", c: 4 },
+            { n: "EMWTL", c: 3 },
+            { n: "COMP", c: 3 },
+            { n: "PP", c: 4 },
+            { n: "SIS", c: 1 },
+            { n: "PSD Lab-3", c: 1 },
+            { n: "Practicum-4", c: 1 },
+            { n: "SEA/SAA-4", c: 1 },
+            { n: "ETS-4", c: 1 }
+        ],
+        "Sem 5": [
+            { n: "M-Elective 1", c: 3 },
+            { n: "Mb-ESARM", c: 4 },
+            { n: "AWP", c: 3 },
+            { n: "AI&ML", c: 4 },
+            { n: "S&E Basket", c: 3 },
+            { n: "EITK", c: 2 },
+            { n: "PSD Lab-4", c: 1 },
+            { n: "Tech. English", c: 1 },
+            { n: "Seminar", c: 1 },
+            { n: "ETS-5", c: 1 }
+        ],
+        "Sem 6": [
+            { n: "P-Elective 1", c: 3 },
+            { n: "DSPA", c: 4 },
+            { n: "VLSI", c: 4 },
+            { n: "DC & CN", c: 3 },
+            { n: "MCB", c: 3 },
+            { n: "UHV-II", c: 2 },
+            { n: "AIML Lab", c: 1 },
+            { n: "Mini Project", c: 1 },
+            { n: "ETS-6", c: 1 }
+        ],
+        "Sem 7": [
+            { n: "M-Elective-II", c: 3 },
+            { n: "P-Elective-II", c: 3 },
+            { n: "SVDV", c: 4 },
+            { n: "MOFC", c: 3 },
+            { n: "WMC", c: 3 },
+            { n: "Internship", c: 1 },
+            { n: "Major Project-I", c: 4 }
+        ],
+        "Sem 8": [
+            { n: "M-Elective-III", c: 3 },
+            { n: "P-Elective-III", c: 3 },
+            { n: "P-Elective-IV", c: 3 },
+            { n: "Major Project-II", c: 6 }
+        ]
     },
     "IT": {
         "Sem 1": [
