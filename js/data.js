@@ -23,7 +23,8 @@ const BRANCH_MAPPING = {
     "CSO": "CSE (IoT)",
     "ECE": "Electronics & Comm. Engg",
     "EEE": "Electrical & Electronics Engg",
-    "ME": "Mechanical Engineering"
+    "ME": "Mechanical Engineering",
+    "IT": "Information Technology"
 };
 
 // Course Data (Migrated from Legacy + Placeholders)
@@ -214,6 +215,94 @@ const COURSE_DATA = {
     },
     "ECE": {
         "Sem 1": [{ n: "Diff Calc & ODE", c: 3 }, { n: "Engg Physics", c: 4 }, { n: "Switching Theory", c: 3 }, { n: "PPS with C", c: 4 }, { n: "Basic Electrical", c: 4 }, { n: "Environmental", c: 0 }, { n: "IDEA Lab", c: 1 }, { n: "Practicum-1", c: 1 }, { n: "SEA/SAA-1", c: 1 }, { n: "Expert Talk-1", c: 1 }]
+    },
+    "IT": {
+        "Sem 1": [
+            { n: "DCODE", c: 3 },
+            { n: "EC", c: 4 },
+            { n: "DLD", c: 3 },
+            { n: "PPSC", c: 4 },
+            { n: "ECRW", c: 2 },
+            { n: "Sports & Yoga", c: 1 },
+            { n: "EGCAD", c: 1 },
+            { n: "Practicum-1", c: 1 },
+            { n: "SEA/SAA-1", c: 1 },
+            { n: "ETS-1", c: 1 }
+        ],
+        "Sem 2": [
+            { n: "MTVC", c: 3 },
+            { n: "EP", c: 4 },
+            { n: "COA", c: 3 },
+            { n: "DSTC", c: 4 },
+            { n: "BEE", c: 4 },
+            { n: "ILMS", c: 1 },
+            { n: "PSD Lab-1", c: 1 },
+            { n: "Practicum-2", c: 1 },
+            { n: "SEA/SAA-2", c: 1 },
+            { n: "ETS-2", c: 1 }
+        ],
+        "Sem 3": [
+            { n: "AI", c: 3 },
+            { n: "ADS", c: 4 },
+            { n: "SE", c: 3 },
+            { n: "DBMS", c: 4 },
+            { n: "OOP Through Java", c: 4 },
+            { n: "SIS", c: 1 },
+            { n: "PSD Lab-2", c: 1 },
+            { n: "Practicum-3", c: 1 },
+            { n: "SEA/SAA-3", c: 1 },
+            { n: "ETS-3", c: 1 }
+        ],
+        "Sem 4": [
+            { n: "DMPS", c: 3 },
+            { n: "DAA", c: 4 },
+            { n: "PP", c: 4 },
+            { n: "OS", c: 4 },
+            { n: "CN", c: 3 },
+            { n: "QALR", c: 2 },
+            { n: "PSD Lab-3", c: 1 },
+            { n: "Practicum-4", c: 1 },
+            { n: "SEA/SAA-4", c: 1 },
+            { n: "ETS-4", c: 1 }
+        ],
+        "Sem 5": [
+            { n: "M-Elective 1", c: 3 },
+            { n: "ML", c: 4 },
+            { n: "Information Security", c: 3 },
+            { n: "Intro to IOT", c: 4 },
+            { n: "M Basket", c: 3 },
+            { n: "UHV-II", c: 2 },
+            { n: "PSD Lab-4", c: 1 },
+            { n: "Tech. English", c: 1 },
+            { n: "Seminar", c: 1 },
+            { n: "ETS-5", c: 1 }
+        ],
+        "Sem 6": [
+            { n: "P-Elective 1", c: 3 },
+            { n: "Data Science", c: 3 },
+            { n: "CC", c: 4 },
+            { n: "Full Stack w Java", c: 4 },
+            { n: "S&E Basket", c: 3 },
+            { n: "EITK", c: 2 },
+            { n: "PSD Lab-5", c: 1 },
+            { n: "Mini Project", c: 1 },
+            { n: "ETS-6", c: 1 }
+        ],
+        "Sem 7": [
+            { n: "M-Elective-II", c: 3 },
+            { n: "P-Elective-II", c: 3 },
+            { n: "DevOps", c: 4 },
+            { n: "BDA", c: 3 },
+            { n: "ST & QA", c: 3 },
+            { n: "Internship", c: 1 },
+            { n: "Major Project-I", c: 4 }
+        ],
+        "Sem 8": [
+            { n: "M-Elective-III", c: 3 },
+            { n: "P-Elective-III", c: 3 },
+            { n: "P-Elective-IV", c: 3 },
+            { n: "Major Project-II", c: 6 }
+        ]
     }
 };
 
