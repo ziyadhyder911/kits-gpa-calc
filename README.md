@@ -11,7 +11,9 @@ I built this because most online GPA calculators don’t follow KITSW’s actual
 - **Accurate SGPA Calculation:** Follows strict URR-24 guidelines.
 - **Target Planner: (Coming Soon)** Helps students calculate the exact SGPA needed in the upcoming semester to achieve a target CGPA.
 - **CGPA to Percentage:** Conversion using the official `(CGPA - 0.5) * 10` formula.
-- **Universal Branch Support:** Fully populated data for **CSE** and **CSM** (AI & ML). *More branches coming soon/ on request.*
+- **Universal Branch Support:** Fully populated data for ALL BRANCHES. 
+- **Target Planner (new feat.):** Input your current CGPA and obtained credits, input your target CGPA and next sem credits. The tool will calculate what SGPA you should score next semester!
+
 
 ## Technical Stack
 
