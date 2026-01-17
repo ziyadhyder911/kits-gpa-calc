@@ -1,7 +1,3 @@
-/**
- * KITSW Universal SGPA Calculator - Course Data
- * Based on URR-24 Regulations
- */
 
 // Grading Scale Constants (URR-24)
 const GRADE_POINTS = {
@@ -12,7 +8,7 @@ const GRADE_POINTS = {
     "D": 6,
     "P": 4,
     "F": 0,
-    "M": 0 // Debarred (Transitional)
+    "M": 0 
 };
 
 const BRANCH_MAPPING = {
@@ -822,7 +818,7 @@ const COURSE_DATA = {
     }
 };
 
-// Populate missing semesters/branches with placeholders to avoid crashes
+// placeholders to avoid crashes
 const COMMON_SEMESTERS = ["Sem 1", "Sem 2", "Sem 3", "Sem 4", "Sem 5", "Sem 6", "Sem 7", "Sem 8"];
 const ALL_BRANCHES = Object.keys(BRANCH_MAPPING);
 
