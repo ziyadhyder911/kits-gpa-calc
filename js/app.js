@@ -9,20 +9,38 @@ const courseContainer = document.getElementById('course-container');
 const courseTableBody = document.getElementById('course-list');
 const resultsSection = document.getElementById('results-section');
 
+// TAB_ORDER is defined in gestures.js
+
 // Tab Switching Logic
 function switchTab(tabId) {
+    // Determine direction
+    const currentActive = document.querySelector('.tab-content:not(.hidden)');
+    const currentIndex = currentActive ? TAB_ORDER.indexOf(currentActive.id) : 0;
+    const newIndex = TAB_ORDER.indexOf(tabId);
+
+    // Default to 'right' (slide in from right) if going forward, 'left' if backward
+    // Initial load (currentIndex -1) just fades or defaults
+    const direction = newIndex > currentIndex ? 'right' : 'left';
+    const animClass = direction === 'right' ? 'animate-slide-right' : 'animate-slide-left';
+
     // Hide all contents
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-    document.querySelectorAll('.tab-btn').forEach(el => {
-        el.classList.remove('text-indigo-600', 'border-indigo-600', 'bg-indigo-50');
-        el.classList.add('text-slate-500', 'hover:text-slate-700');
+    document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('animate-slide-right', 'animate-slide-left', 'animate-fade-in');
     });
 
-    // Show selected
-    document.getElementById(tabId).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // Show selected with animation
+    const target = document.getElementById(tabId);
+    target.classList.remove('hidden');
+    void target.offsetWidth; // Force reflow
+    target.classList.add(animClass);
+
     const activeBtn = document.querySelector(`[onclick="switchTab('${tabId}')"]`);
-    activeBtn.classList.remove('text-slate-500', 'hover:text-slate-700');
-    activeBtn.classList.add('text-indigo-600', 'border-indigo-600', 'bg-indigo-50');
+    if (activeBtn) activeBtn.classList.add('active');
 }
 
 // Initialization
@@ -46,10 +64,69 @@ function init() {
         }
         courseContainer.classList.add('hidden');
         resultsSection.classList.add('hidden');
+
+        // Reset Bunk Buffer if active
+        if (typeof renderAttendanceTable === 'function') {
+            renderAttendanceTable();
+        }
     });
 
     // Render Courses on Semester Change
-    semesterSelect.addEventListener('change', renderCourses);
+    semesterSelect.addEventListener('change', () => {
+        renderCourses();
+        if (typeof renderAttendanceTable === 'function') {
+            renderAttendanceTable();
+        }
+    });
+
+    // Initialize Attendance Module (if present)
+    if (typeof initAttendance === 'function') {
+        initAttendance();
+    }
+
+    // Initialize Gestures
+    if (typeof initGestures === 'function') {
+        initGestures();
+    }
+
+    // Theme Toggle Logic
+    const themeBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    function toggleDarkMode() {
+        const isDark = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateThemeIcons(isDark);
+    }
+
+    function updateThemeIcons(isDark) {
+        if (isDark) {
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        updateThemeIcons(true);
+    }
+
+    themeBtn.addEventListener('click', toggleDarkMode);
+
+    // Show Swipe Hint every time
+    const hint = document.getElementById('swipe-hint');
+    if (hint) {
+        hint.classList.remove('hidden');
+        // Auto hide after 5s
+        setTimeout(() => {
+            hint.classList.add('hidden');
+        }, 5000);
+    }
 }
 
 function renderCourses() {
@@ -64,15 +141,16 @@ function renderCourses() {
     courseTableBody.innerHTML = '';
     COURSE_DATA[branch][sem].forEach((course, index) => {
         const row = document.createElement('tr');
-        row.className = "hover:bg-slate-50 transition-colors";
+        // Removed explicit hover:bg-slate-50, relying on CSS tbody tr:hover
+        row.className = "transition-colors";
         row.innerHTML = `
-            <td class="p-4 text-sm font-medium text-slate-700">
+            <td class="p-4 text-sm font-medium theme-text">
                 ${course.n}
-                <div class="md:hidden text-xs text-slate-400 mt-1">Credits: ${course.c}</div>
+                <div class="md:hidden text-xs theme-muted-light mt-1">Credits: ${course.c}</div>
             </td>
-            <td class="p-4 text-center text-sm font-bold text-slate-500 hidden md:table-cell">${course.c}</td>
+            <td class="p-4 text-center text-sm font-bold theme-muted hidden md:table-cell">${course.c}</td>
             <td class="p-4 max-w-[140px]">
-                <select class="grade-input w-full p-2 bg-white border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" 
+                <select class="grade-input theme-input w-full p-2 border theme-border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition" 
                         data-credits="${course.c}" onchange="calculateResults()">
                     <option value="" selected disabled>Grade</option>
                     ${Object.keys(GRADE_POINTS).filter(g => g !== 'F' && g !== 'M').map(g => `<option value="${GRADE_POINTS[g]}">${g} (${GRADE_POINTS[g]})</option>`).join('')}

@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --card: #ffffff;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --heading: #0f172a;
+        --muted: #64748b;
+        --muted-light: #94a3b8;
+        --primary: #4f46e5;
+        --primary-light: #e0e7ff;
+        --input-bg: #f1f5f9;
+        --input-text: #0f172a;
+        --placeholder: #94a3b8;
+        --shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --row-hover-bg: #f8fafc;
+        --row-active-bg: #e0e7ff;
+        --table-border: #e2e8f0;
+        --result-bg: #F1F5FF;
+        --result-text: #64748B;
+    }
+
+    .dark-mode {
+        --bg: #1B1F3B;
+        --surface: #1B1F3B;
+        --card: #0B0E1A;
+        --border: #2A2F55;
+        --table-border: #32396A;
+        --text: #DDE6ED;
+        --heading: #C7D2FE;
+        --muted: #9AA4B2;
+        --muted-light: #7F8BA3;
+        --primary: #818cf8;
+        --primary-light: #2A2F55;
+        --input-bg: #0B0E1A;
+        --input-text: #DDE6ED;
+        --placeholder: #6B7280;
+        --shadow: none;
+        --row-hover-bg: #161B33;
+        --row-active-bg: #1E2447;
+        --result-bg: #0B0E1A;
+        --result-text: #9AA4B2;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg);
+        color: var(--text);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer utilities {
+    .theme-bg {
+        background-color: var(--bg) !important;
+    }
+
+    .theme-surface {
+        background-color: var(--surface) !important;
+        border-color: var(--border) !important;
+    }
+
+    .theme-card {
+        background-color: var(--card) !important;
+        border-color: var(--border) !important;
+        box-shadow: var(--shadow) !important;
+    }
+
+    .theme-shadow {
+        box-shadow: var(--shadow) !important;
+    }
+
+    .theme-text {
+        color: var(--text) !important;
+    }
+
+    .theme-heading {
+        color: var(--heading) !important;
+    }
+
+    .theme-muted {
+        color: var(--muted) !important;
+    }
+
+    .theme-muted-light {
+        color: var(--muted-light) !important;
+    }
+
+    .theme-border {
+        border-color: var(--border) !important;
+    }
+
+    .theme-input {
+        background-color: var(--input-bg) !important;
+        border-color: var(--border) !important;
+        color: var(--input-text) !important;
+    }
+
+    .theme-input::placeholder {
+        color: var(--placeholder) !important;
+        opacity: 1;
+    }
+
+    .theme-result {
+        background-color: var(--result-bg) !important;
+        color: var(--result-text) !important;
+        border-color: var(--border) !important;
+    }
+
+    .btn-glow {
+        box-shadow: 0 0 28px rgba(99, 102, 241, 0.35);
+    }
+
+    .scroller-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scroller-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+/* Essential Overrides for Components */
+header h1 {
+    color: var(--heading) !important;
+}
+
+header p {
+    color: var(--muted) !important;
+}
+
+/* Component Styles */
+.tab-btn {
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    background-color: var(--row-hover-bg);
+}
+
+h3 {
+    color: var(--heading) !important;
+}
+
+/* Table specific */
+thead {
+    background-color: var(--surface);
+    border-color: var(--table-border);
+}
+
+thead th {
+    color: var(--muted-light);
+}
+
+tbody tr {
+    border-color: var(--table-border) !important;
+    background-color: var(--card);
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: var(--row-hover-bg) !important;
+}
+
+td {
+    color: var(--text);
+}
+
+td.text-muted {
+    color: var(--muted) !important;
+}
+
+td.text-muted-light {
+    color: var(--muted-light) !important;
+}
+
+/* Animations - Premium Directional Swipes */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
