@@ -31,8 +31,8 @@ KITS One is a complete academic companion designed to take the guesswork out of 
 
 Feel free to reach out for feature requests or bug reports:
 
-- **LinkedIn:** [Ziyad Hyder](https://www.linkedin.com/in/ziyadhyder/)
-- **GitHub:** [ziyad-hyder](https://github.com/ziyad-hyder)
+- **LinkedIn:** [Ziyad Hyder](https://www.linkedin.com/in/ziyad-hyder-b0229931b/)
+- **GitHub:** [ziyadhyder911](https://github.com/ziyadhyder911)
 - **Email:** [ziyadhyder01@gmail.com](mailto:ziyadhyder01@gmail.com)
 - **Found a bug?** Open an issue or a Pull Request.
 - **Missing your branch data?** All curriculum PDFs are in the `/PDFs` folder for verification.

@@ -41,6 +41,11 @@ function switchTab(tabId) {
 
     const activeBtn = document.querySelector(`[onclick="switchTab('${tabId}')"]`);
     if (activeBtn) activeBtn.classList.add('active');
+
+    // Trigger help modal for this tab (if not dismissed)
+    if (typeof HelpSystem !== 'undefined' && HelpSystem.content[tabId]) {
+        setTimeout(() => HelpSystem.show(tabId), 300);
+    }
 }
 
 // Initialization
@@ -87,6 +92,11 @@ function init() {
     // Initialize Gestures
     if (typeof initGestures === 'function') {
         initGestures();
+    }
+
+    // Initialize Help System
+    if (typeof HelpSystem !== 'undefined') {
+        HelpSystem.init();
     }
 
     // Theme Toggle Logic
